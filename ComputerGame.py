@@ -1,7 +1,7 @@
 from Game import Game
 
 
-class BoardGame(Game):
+class ComputerGame(Game):
     __title = None
     __min_players = None
     __max_players = None
@@ -13,10 +13,10 @@ class BoardGame(Game):
         self.__max_players = max_players
 
     def disconnect_player(self):
-        return super().__current_players - 1
+        return self.current_players - 1
 
     def connect_player(self):
-        return self.current_players + 1 if self.current_players < self.max_players else self.current_players
+        return self.current_player + 1 if self.current_players < self.max_players else self.current_players
 
     def can_play(self):
         return self.max_players >= self.current_players >= self.min_players
