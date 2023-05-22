@@ -1,44 +1,82 @@
+"""
+Module: game
+
+This module defines the abstract base class Game and its subclasses
+    representing different types of games.
+"""
+
 from abc import ABC, abstractmethod
 
 
 class Game(ABC):
+    """
+        Abstract base class representing a game.
 
-    def __init__(self, publisher="", relise_year=0, current_players=0):
+        Attributes:
+            publisher (str): The publisher of the game.
+            realise_year (int): The year the game was released.
+            current_players (int): The current number of players in the game.
+
+        Methods:
+            disconnect_player(): Abstract method to disconnect a player from the game.
+            connect_player(): Abstract method to connect a player to the game.
+            can_play(): Abstract method to check if the game can be played.
+            to_string(): Abstract method to convert the object's attributes
+                to a string representation.
+
+        """
+
+    def __init__(self, publisher="", realise_year=0, current_players=0):
+        """
+                Initializes a Game object.
+
+                Args:
+                    publisher (str): The publisher of the game. Defaults to an empty string.
+                    realise_year (int): The year the game was released. Defaults to 0.
+                    current_players (int): The current number of players in the game. Defaults to 0.
+
+                """
         self.publisher = publisher
-        self.relise_year = relise_year
+        self.realise_year = realise_year
         self.current_players = current_players
 
     @abstractmethod
     def disconnect_player(self):
         """
-        disconnect one player from the game;
-        :arg current_players - integer
+        Abstract method to disconnect a player from the game.
 
-        :return: number of player - 1
+        Returns:
+            int: The number of players after disconnecting one player.
+
         """
 
     @abstractmethod
     def connect_player(self):
         """
-        connect one player if current number of players is less than max
-        :arg current_players and max_players - integer
+        Abstract method to connect a player to the game.
 
-        :return: integer current_payer after adding a person
+        Returns:
+            int: The current number of players after adding a player.
+
         """
 
     @abstractmethod
     def can_play(self):
         """
-        :arg current_player, min_players and max_players - integer
+        Abstract method to check if the game can be played.
 
-        :return: boolean true if current_players is less or equal to max_players and more or equal to min_players
-                         false in the other situations
+        Returns:
+            bool: True if the current number of players is within the specified range,
+                  False otherwise.
+
         """
 
     @abstractmethod
     def to_string(self):
         """
-        Method convert all atrebuts to string and return it
+        Abstract method to convert the object's attributes to a string representation.
 
-        :return: a string representation of an object
+        Returns:
+            str: A string representation of the object.
+
         """

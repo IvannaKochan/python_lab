@@ -1,27 +1,29 @@
 """
-A class representing a board game, inheriting from the Game class.
+A class representing a computer game, inheriting from the Game class.
 """
 # pylint: disable=import-error
 from lab_8.models.game import Game
 
 
-class BoardGame(Game):
+class ComputerGame(Game):
     """
-    A class representing a board game, inheriting from the Game class.
+    A class representing a computer game, inheriting from the Game class.
 
     Attributes:
-        title (str): The title of the board game.
-        publisher (str): The publisher of the board game.
-        realise_year (int): The year the board game was released.
-        min_players (int): The minimum number of players required to play the board game.
-        max_players (int): The maximum number of players allowed to play the board game.
-        current_players (int): The current number of players in the board game.
+        title (str): The title of the computer game.
+        publisher (str): The publisher of the computer game.
+        realise_year (int): The year the computer game was released.
+        min_players (int): The minimum number of players required to play the computer game.
+        max_players (int): The maximum number of players allowed to play the computer game.
+        current_players (int): The current number of players in the computer game.
 
     Methods:
-        disconnect_player(): Overrides the parent class method to disconnect a player
-                    from the board game.
-        connect_player(): Overrides the parent class method to connect a player to the board game.
-        can_play(): Overrides the parent class method to check if the board game can be played.
+        disconnect_player(): Overrides the parent class method to disconnect a player from
+                    the computer game.
+        connect_player(): Overrides the parent class method to connect a player to
+                    the computer game.
+        can_play(): Overrides the parent class method to check if
+                    the computer game can be played.
         to_string(): Overrides the parent class method to convert the object's attributes
                     to a string representation.
 
@@ -29,21 +31,21 @@ class BoardGame(Game):
 
     def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0, current_players=0):
         """
-        Initializes a BoardGame object.
+        Initializes a ComputerGame object.
 
         Args:
-            title (str): The title of the board game.
+            title (str): The title of the computer game.
                         Defaults to an empty string.
-            publisher (str): The publisher of the board game.
+            publisher (str): The publisher of the computer game.
                         Defaults to an empty string.
-            realise_year (int): The year the board game was released.
+            realise_year (int): The year the computer game was released.
                         Defaults to 0.
             min_players (int): The minimum number of players required to play
-                        the board game. Defaults to 0.
+                        the computer game. Defaults to 0.
             max_players (int): The maximum number of players allowed to play
-                        the board game. Defaults to 0.
-            current_players (int): The current number of players in the board
-                        game. Defaults to 0.
+                        the computer game. Defaults to 0.
+            current_players (int): The current number of players in
+                        the computer game. Defaults to 0.
 
         """
         super().__init__(publisher, realise_year, current_players)
@@ -67,9 +69,10 @@ class BoardGame(Game):
 
         Returns:
             int: The current number of players after adding a player, unless the maximum limit
-            is reached, then the current number of players remains unchanged.
+                    is reached, then the current number of players remains unchanged.
 
         """
+
         return self.current_players + 1 if self.current_players < self.max_players \
             else self.current_players
 
@@ -87,12 +90,12 @@ class BoardGame(Game):
     def to_string(self):
         """
         Overrides the parent class method to convert the object's attributes
-                to a string representation.
+            to a string representation.
 
         Returns:
-            str: A string representation of the BoardGame object.
+            str: A string representation of the ComputerGame object.
 
         """
-        return "Board Game" + self.title + ", publisher " + self.publisher + ", realise year " \
+        return "Computer Game" + self.title + ", publisher " + self.publisher + ", realise year " \
             + str(self.realise_year) + ", min players " + str(self.min_players) + ", max players " \
             + str(self.max_players) + ", current player " + str(self.current_players)

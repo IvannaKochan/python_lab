@@ -1,27 +1,29 @@
 """
-A class representing a board game, inheriting from the Game class.
+A class representing an educational game, inheriting from the Game class.
 """
 # pylint: disable=import-error
 from lab_8.models.game import Game
 
 
-class BoardGame(Game):
+class EducationalGame(Game):
     """
-    A class representing a board game, inheriting from the Game class.
+    A class representing an educational game, inheriting from the Game class.
 
     Attributes:
-        title (str): The title of the board game.
-        publisher (str): The publisher of the board game.
-        realise_year (int): The year the board game was released.
-        min_players (int): The minimum number of players required to play the board game.
-        max_players (int): The maximum number of players allowed to play the board game.
-        current_players (int): The current number of players in the board game.
+        title (str): The title of the educational game.
+        publisher (str): The publisher of the educational game.
+        realise_year (int): The year the educational game was released.
+        min_players (int): The minimum number of players required to play the educational game.
+        max_players (int): The maximum number of players allowed to play the educational game.
+        current_players (int): The current number of players in the educational game.
 
     Methods:
         disconnect_player(): Overrides the parent class method to disconnect a player
-                    from the board game.
-        connect_player(): Overrides the parent class method to connect a player to the board game.
-        can_play(): Overrides the parent class method to check if the board game can be played.
+                    from the educational game.
+        connect_player(): Overrides the parent class method to connect a player
+                    to the educational game.
+        can_play(): Overrides the parent class method to check if the educational game
+                    can be played.
         to_string(): Overrides the parent class method to convert the object's attributes
                     to a string representation.
 
@@ -29,21 +31,21 @@ class BoardGame(Game):
 
     def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0, current_players=0):
         """
-        Initializes a BoardGame object.
+        Initializes an EducationalGame object.
 
         Args:
-            title (str): The title of the board game.
+            title (str): The title of the educational game.
                         Defaults to an empty string.
-            publisher (str): The publisher of the board game.
+            publisher (str): The publisher of the educational game.
                         Defaults to an empty string.
-            realise_year (int): The year the board game was released.
+            realise_year (int): The year the educational game was released.
                         Defaults to 0.
             min_players (int): The minimum number of players required to play
-                        the board game. Defaults to 0.
+                        the educational game. Defaults to 0.
             max_players (int): The maximum number of players allowed to play
-                        the board game. Defaults to 0.
-            current_players (int): The current number of players in the board
-                        game. Defaults to 0.
+                        the educational game. Defaults to 0.
+            current_players (int): The current number of players in
+                        the educational game. Defaults to 0.
 
         """
         super().__init__(publisher, realise_year, current_players)
@@ -53,7 +55,7 @@ class BoardGame(Game):
 
     def disconnect_player(self):
         """
-        Overrides the parent class method to disconnect a player from the board game.
+        Overrides the parent class method to disconnect a player from the educational game.
 
         Returns:
             int: The number of players after disconnecting one player.
@@ -63,11 +65,11 @@ class BoardGame(Game):
 
     def connect_player(self):
         """
-        Overrides the parent class method to connect a player to the board game.
+        Overrides the parent class method to connect a player to the educational game.
 
         Returns:
             int: The current number of players after adding a player, unless the maximum limit
-            is reached, then the current number of players remains unchanged.
+                    is reached, then the current number of players remains unchanged.
 
         """
         return self.current_players + 1 if self.current_players < self.max_players \
@@ -75,7 +77,7 @@ class BoardGame(Game):
 
     def can_play(self):
         """
-        Overrides the parent class method to check if the board game can be played.
+        Overrides the parent class method to check if the educational game can be played.
 
         Returns:
             bool: True if the current number of players is within the specified range,
@@ -87,12 +89,12 @@ class BoardGame(Game):
     def to_string(self):
         """
         Overrides the parent class method to convert the object's attributes
-                to a string representation.
+            to a string representation.
 
         Returns:
-            str: A string representation of the BoardGame object.
+            str: A string representation of the EducationalGame object.
 
         """
-        return "Board Game" + self.title + ", publisher " + self.publisher + ", realise year " \
+        return "Educational Game" + self.title + ", publisher " + self.publisher + ", realise year " \
             + str(self.realise_year) + ", min players " + str(self.min_players) + ", max players " \
             + str(self.max_players) + ", current player " + str(self.current_players)
