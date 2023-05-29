@@ -67,9 +67,8 @@ class GameManager:
                 to 'realise_year_the_oldest_game'.
 
         """
-        return list(
-            filter(
-                lambda game: game.realise_year >= realise_year_the_oldest_game, self.games))
+
+        return list(filter(lambda game: game.realise_year >= realise_year_the_oldest_game, self.games))
 
     def find_games_for_this_number_of_players(self, number_of_player):
         """
@@ -83,6 +82,4 @@ class GameManager:
             list: A list of game objects whose minimum and maximum number of
                     players includes 'number_of_player'.
         """
-        return list(
-            filter(
-                lambda game: game.max_players >= number_of_player >= game.min_players, self.games))
+        return list(filter(lambda game: game.max_players >= number_of_player >= game.min_players, self.games))
