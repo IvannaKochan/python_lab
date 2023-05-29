@@ -1,7 +1,7 @@
 """
 A class representing a computer game, inheriting from the Game class.
 """
-# pylint: disable=import-error
+
 from lab_8.models.game import Game
 
 

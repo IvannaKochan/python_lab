@@ -1,7 +1,7 @@
 """
 A class representing a board game, inheriting from the Game class.
 """
-# pylint: disable=import-error
+
 from lab_8.models.game import Game
 
 
@@ -70,8 +70,7 @@ class BoardGame(Game):
             is reached, then the current number of players remains unchanged.
 
         """
-        return self.current_players + 1 if self.current_players < self.max_players \
-            else self.current_players
+        return self.current_players + 1 if self.current_players < self.max_players else self.current_players
 
     def can_play(self):
         """
@@ -93,6 +92,6 @@ class BoardGame(Game):
             str: A string representation of the BoardGame object.
 
         """
-        return "Board Game" + self.title + ", publisher " + self.publisher + ", realise year " \
-            + str(self.realise_year) + ", min players " + str(self.min_players) + ", max players " \
-            + str(self.max_players) + ", current player " + str(self.current_players)
+        return "Board Game" + self.title + ", publisher " + self.publisher + ", realise year " + str(self.realise_year) \
+            + ", min players " + str(self.min_players) + ", max players " + str(self.max_players) \
+            + ", current player " + str(self.current_players)

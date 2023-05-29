@@ -1,7 +1,7 @@
 """
 A class representing an educational game, inheriting from the Game class.
 """
-# pylint: disable=import-error
+
 from lab_8.models.game import Game
 
 
@@ -29,7 +29,8 @@ class EducationalGame(Game):
 
     """
 
-    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0, current_players=0):
+    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0,
+                 current_players=0):
         """
         Initializes an EducationalGame object.
 
@@ -72,8 +73,7 @@ class EducationalGame(Game):
                     is reached, then the current number of players remains unchanged.
 
         """
-        return self.current_players + 1 if self.current_players < self.max_players \
-            else self.current_players
+        return (self.current_players + 1) if self.current_players < self.max_players else self.current_players
 
     def can_play(self):
         """
@@ -95,6 +95,7 @@ class EducationalGame(Game):
             str: A string representation of the EducationalGame object.
 
         """
-        return "Educational Game" + self.title + ", publisher " + self.publisher + ", realise year " \
-            + str(self.realise_year) + ", min players " + str(self.min_players) + ", max players " \
-            + str(self.max_players) + ", current player " + str(self.current_players)
+        return "Educational Game" + self.title + ", publisher " + self.publisher \
+            + ", realise year " + str(self.realise_year) + ", min players " \
+            + str(self.min_players) + ", max players " + str(self.max_players) \
+            + ", current player " + str(self.current_players)

@@ -1,7 +1,7 @@
 """
 A class representing a mobile game, inheriting from the Game class.
 """
-# pylint: disable=import-error
+
 from lab_8.models.game import Game
 
 
@@ -28,7 +28,8 @@ class MobileGame(Game):
 
         """
 
-    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0, current_players=0):
+    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0,
+                 current_players=0):
         """
                 Initializes a MobileGame object.
 
@@ -71,8 +72,7 @@ class MobileGame(Game):
                     is reached, then the current number of players remains unchanged.
 
         """
-        return self.current_players + 1 if self.current_players < self.max_players \
-            else self.current_players
+        return self.current_players + 1 if self.current_players < self.max_players else self.current_players
 
     def can_play(self):
         """
