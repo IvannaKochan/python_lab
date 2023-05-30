@@ -20,6 +20,9 @@ Classes:
 
 """
 
+from lab_9.decorators.logger_decorator import method_call_history_decorator
+from lab_9.decorators.lenght_decorator import length_decorator
+
 
 class GameManager:
     """
@@ -41,6 +44,36 @@ class GameManager:
         Initializes a GameManager object with an empty list of games.
         """
         self.games = []
+
+    def __len__(self):
+        """
+        Returns the length of the games list.
+
+        Returns:
+            int: The length of the games list.
+        """
+        return len(self.games)
+
+    def __getitem__(self, item):
+        """
+        Returns the item at the given index from the games list.
+
+        Args:
+            item: The index of the item to retrieve.
+
+        Returns:
+            Any: The item at the given index.
+        """
+        return self.games[item]
+
+    def __iter__(self):
+        """
+        Returns an iterator object over the games list.
+
+        Returns:
+            Iterator: An iterator object over the games list.
+        """
+        return iter(self.games)
 
     def add_game(self, game):
         """
@@ -83,3 +116,41 @@ class GameManager:
                     players includes 'number_of_player'.
         """
         return list(filter(lambda game: game.max_players >= number_of_player >= game.min_players, self.games))
+
+    def list_of_can_play(self):
+        """
+        Returns a list of boolean values indicating whether each game can be played.
+
+        Returns:
+            list: A list of boolean values indicating whether each game can be played.
+        """
+        return [game.can_play() for game in self.games]
+
+    def enumerate_list(self):
+        """
+        Returns a list of formatted strings containing the game and its index.
+
+        Returns:
+            list: A list of formatted strings containing the game and its index.
+        """
+        return [f"{game} {index}" for index, game in enumerate(self.games)]
+
+    @method_call_history_decorator("lab_9\models\history_method.txt")
+    # @length_decorator
+    def zip_list(self):
+        """
+        Returns a list of formatted strings combining each game with its can_play() value.
+
+        Returns:
+            list: A list of formatted strings combining each game with its can_play() value.
+        """
+        return [f"{game}{method}" for game, method in zip(self.games, self.list_of_can_play())]
+
+    def dict_type(self, data_type):
+        return [game.get_attributes_by_type(data_type) for game in self.games]
+
+    def dict_condition_can_play(self):
+        """
+        :return: dict of any() and all() result
+        """
+        return {"any": any(self.list_of_can_play()), "all": all(self.list_of_can_play())}

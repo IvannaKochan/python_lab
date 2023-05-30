@@ -2,7 +2,7 @@
 A class representing a computer game, inheriting from the Game class.
 """
 
-from lab_8.models.game import Game
+from lab_9.models.game import Game
 
 
 class ComputerGame(Game):
@@ -29,7 +29,8 @@ class ComputerGame(Game):
 
     """
 
-    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0, current_players=0):
+    def __init__(self, title: str = "", publisher: str = "", platform: str = "", realise_year: int = 0,
+                 min_players: int = 0, max_players: int = 0, current_players: int = 0):
         """
         Initializes a ComputerGame object.
 
@@ -50,8 +51,11 @@ class ComputerGame(Game):
         """
         super().__init__(publisher, realise_year, current_players)
         self.title = title
+        self.platform = platform
         self.min_players = min_players
         self.max_players = max_players
+        self.set_of_language = {"english", "france"}
+
 
     def disconnect_player(self):
         """
@@ -87,7 +91,7 @@ class ComputerGame(Game):
         """
         return self.max_players >= self.current_players >= self.min_players
 
-    def to_string(self):
+    def __str__(self):
         """
         Overrides the parent class method to convert the object's attributes
             to a string representation.
@@ -96,6 +100,5 @@ class ComputerGame(Game):
             str: A string representation of the ComputerGame object.
 
         """
-        return "Computer Game" + self.title + ", publisher " + self.publisher + ", realise year " \
-            + str(self.realise_year) + ", min players " + str(self.min_players) + ", max players " \
-            + str(self.max_players) + ", current player " + str(self.current_players)
+        return f"Computer Game: {self.title}, {self.publisher}, {self.platform}, " \
+               f"{self.realise_year}, {self.min_players}, {self.max_players}, {self.current_players}"

@@ -2,7 +2,7 @@
 A class representing an educational game, inheriting from the Game class.
 """
 
-from lab_8.models.game import Game
+from lab_9.models.game import Game
 
 
 class EducationalGame(Game):
@@ -29,8 +29,8 @@ class EducationalGame(Game):
 
     """
 
-    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0,
-                 current_players=0):
+    def __init__(self, title: str = "", publisher: str = "", subject: str = "", realise_year: int = 0,
+                 min_players: int = 0, max_players: int = 0, current_players: int = 0):
         """
         Initializes an EducationalGame object.
 
@@ -51,8 +51,11 @@ class EducationalGame(Game):
         """
         super().__init__(publisher, realise_year, current_players)
         self.title = title
+        self.subject = subject
         self.min_players = min_players
         self.max_players = max_players
+        self.set_of_language = {"polish"}
+
 
     def disconnect_player(self):
         """
@@ -86,7 +89,7 @@ class EducationalGame(Game):
         """
         return self.max_players >= self.current_players >= self.min_players
 
-    def to_string(self):
+    def __str__(self):
         """
         Overrides the parent class method to convert the object's attributes
             to a string representation.
@@ -95,7 +98,5 @@ class EducationalGame(Game):
             str: A string representation of the EducationalGame object.
 
         """
-        return "Educational Game" + self.title + ", publisher " + self.publisher \
-            + ", realise year " + str(self.realise_year) + ", min players " \
-            + str(self.min_players) + ", max players " + str(self.max_players) \
-            + ", current player " + str(self.current_players)
+        return f"Educational Game: {self.title}, {self.publisher}, {self.subject}, {self.realise_year}, " \
+               f"{self.min_players}, {self.max_players}, {self.current_players}"
