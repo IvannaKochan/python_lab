@@ -135,7 +135,7 @@ class GameManager:
         """
         return [f"{game} {index}" for index, game in enumerate(self.games)]
 
-    @method_call_history_decorator("lab_9\models\history_method.txt")
+    @method_call_history_decorator("lab_9\history_method.txt")
     # @length_decorator
     def zip_list(self):
         """

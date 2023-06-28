@@ -1,7 +1,8 @@
 """
 A class representing a computer game, inheriting from the Game class.
 """
-
+from lab_9.decorators.logged import logged
+from lab_9.exception.max_player_exception import MaxPlayersException
 from lab_9.models.game import Game
 
 
@@ -73,13 +74,14 @@ class ComputerGame(Game):
 
         Returns:
             int: The current number of players after adding a player, unless the maximum limit
-                    is reached, then the current number of players remains unchanged.
+            is reached, then the current number of players remains unchanged.
 
         """
+        # if self.current_players == self.max_players:
+        #     raise MaxPlayersException
+        return self.current_players + 1 if self.current_players < self.max_players else self.current_players
 
-        return self.current_players + 1 if self.current_players < self.max_players \
-            else self.current_players
-
+    @logged(MaxPlayersException, "console")
     def can_play(self):
         """
         Overrides the parent class method to check if the board game can be played.
@@ -89,7 +91,10 @@ class ComputerGame(Game):
                   False otherwise.
 
         """
-        return self.max_players >= self.current_players >= self.min_players
+        if self.max_players >= self.current_players >= self.min_players:
+            return True
+        else:
+            raise MaxPlayersException
 
     def __str__(self):
         """

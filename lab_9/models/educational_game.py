@@ -1,7 +1,8 @@
 """
 A class representing an educational game, inheriting from the Game class.
 """
-
+from lab_9.decorators.logged import logged
+from lab_9.exception.max_player_exception import MaxPlayersException
 from lab_9.models.game import Game
 
 
@@ -76,18 +77,22 @@ class EducationalGame(Game):
                     is reached, then the current number of players remains unchanged.
 
         """
-        return (self.current_players + 1) if self.current_players < self.max_players else self.current_players
+        return self.current_players + 1 if self.current_players < self.max_players else self.current_players
 
+    @logged(MaxPlayersException, "console")
     def can_play(self):
         """
-        Overrides the parent class method to check if the educational game can be played.
+        Overrides the parent class method to check if the board game can be played.
 
         Returns:
             bool: True if the current number of players is within the specified range,
                   False otherwise.
 
         """
-        return self.max_players >= self.current_players >= self.min_players
+        if self.max_players >= self.current_players >= self.min_players:
+            return True
+        else:
+            raise MaxPlayersException
 
     def __str__(self):
         """
