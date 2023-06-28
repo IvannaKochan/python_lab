@@ -54,3 +54,4 @@ for game in game_list.games:
 
 for game in game_list.games:
     print(game.can_play())
+
