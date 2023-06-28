@@ -26,19 +26,27 @@ class Game(ABC):
 
         """
 
-    def __init__(self, publisher="", realise_year=0, current_players=0):
+    def __init__(self, publisher: str = "", realise_year: int = 0, current_players: int = 0):
         """
-                Initializes a Game object.
+        Initializes a Game object.
 
-                Args:
-                    publisher (str): The publisher of the game. Defaults to an empty string.
-                    realise_year (int): The year the game was released. Defaults to 0.
-                    current_players (int): The current number of players in the game. Defaults to 0.
+        Args:
+            publisher (str): The publisher of the game. Defaults to an empty string.
+            realise_year (int): The year the game was released. Defaults to 0.
+            current_players (int): The current number of players in the game. Defaults to 0.
 
-                """
+        """
         self.publisher = publisher
         self.realise_year = realise_year
         self.current_players = current_players
+        self.set_of_language = {}
+
+    def __str__(self):
+        return f"Game: {self.publisher}, {self.realise_year}, {self.current_players}"
+
+
+    def __iter__(self):
+        return iter(self.set_of_language)
 
     @abstractmethod
     def disconnect_player(self):
@@ -71,12 +79,5 @@ class Game(ABC):
 
         """
 
-    @abstractmethod
-    def to_string(self):
-        """
-        Abstract method to convert the object's attributes to a string representation.
-
-        Returns:
-            str: A string representation of the object.
-
-        """
+    def get_attributes_by_type(self, data_type):
+        return {key: value for key, value in self.__dict__.items() if isinstance(value, data_type)}

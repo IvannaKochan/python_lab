@@ -1,8 +1,9 @@
 """
 A class representing a board game, inheriting from the Game class.
 """
-
-from lab_8.models.game import Game
+from lab_9.decorators.logged import logged
+from lab_9.exception.max_player_exception import MaxPlayersException
+from lab_9.models.game import Game
 
 
 class BoardGame(Game):
@@ -27,7 +28,8 @@ class BoardGame(Game):
 
     """
 
-    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0, current_players=0):
+    def __init__(self, title: str = "", publisher: str = "", realise_year: int = 0, min_players: int = 0,
+                 max_players: int = 0, current_players: int = 0):
         """
         Initializes a BoardGame object.
 
@@ -50,6 +52,7 @@ class BoardGame(Game):
         self.title = title
         self.min_players = min_players
         self.max_players = max_players
+        self.set_of_language = {"ukrainian", "chinese"}
 
     def disconnect_player(self):
         """
@@ -72,6 +75,7 @@ class BoardGame(Game):
         """
         return self.current_players + 1 if self.current_players < self.max_players else self.current_players
 
+    @logged(MaxPlayersException, "console")
     def can_play(self):
         """
         Overrides the parent class method to check if the board game can be played.
@@ -81,17 +85,19 @@ class BoardGame(Game):
                   False otherwise.
 
         """
-        return self.max_players >= self.current_players >= self.min_players
+        if self.max_players >= self.current_players >= self.min_players:
+            return True
+        else:
+            raise MaxPlayersException
 
-    def to_string(self):
+    def __str__(self):
         """
         Overrides the parent class method to convert the object's attributes
-                to a string representation.
+            to a string representation.
 
         Returns:
             str: A string representation of the BoardGame object.
 
         """
-        return "Board Game" + self.title + ", publisher " + self.publisher + ", realise year " + str(self.realise_year) \
-            + ", min players " + str(self.min_players) + ", max players " + str(self.max_players) \
-            + ", current player " + str(self.current_players)
+        return f"Board Game: {self.title}, {self.publisher}, {self.realise_year}, {self.min_players}, " \
+               f"{self.max_players}, {self.current_players}"

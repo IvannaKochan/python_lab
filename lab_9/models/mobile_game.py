@@ -1,8 +1,9 @@
 """
 A class representing a mobile game, inheriting from the Game class.
 """
-
-from lab_8.models.game import Game
+from lab_9.decorators.logged import logged
+from lab_9.exception.max_player_exception import MaxPlayersException
+from lab_9.models.game import Game
 
 
 class MobileGame(Game):
@@ -28,8 +29,8 @@ class MobileGame(Game):
 
         """
 
-    def __init__(self, title="", publisher="", realise_year=0, min_players=0, max_players=0,
-                 current_players=0):
+    def __init__(self, title: str = "", publisher: str = "", game_version: float = 0.0, realise_year: int = 0,
+                 min_players: int = 0, max_players: int = 0, current_players: int = 0):
         """
                 Initializes a MobileGame object.
 
@@ -50,8 +51,11 @@ class MobileGame(Game):
                 """
         super().__init__(publisher, realise_year, current_players)
         self.title = title
+        self.game_version = game_version
         self.min_players = min_players
         self.max_players = max_players
+        self.set_of_language = {"dutch", "italy", "japanese"}
+
 
     def disconnect_player(self):
         """
@@ -74,19 +78,22 @@ class MobileGame(Game):
         """
         return self.current_players + 1 if self.current_players < self.max_players else self.current_players
 
+    @logged(MaxPlayersException, "console")
     def can_play(self):
         """
-        Overrides the parent class method to check if the mobile game can be played.
+        Overrides the parent class method to check if the board game can be played.
 
         Returns:
             bool: True if the current number of players is within the specified range,
                   False otherwise.
 
         """
+        if self.max_players >= self.current_players >= self.min_players:
+            return True
+        else:
+            raise MaxPlayersException
 
-        return self.max_players >= self.current_players >= self.min_players
-
-    def to_string(self):
+    def __str__(self):
         """
         Overrides the parent class method to convert the object's attributes
             to a string representation.
@@ -95,6 +102,5 @@ class MobileGame(Game):
             str: A string representation of the MobileGame object.
 
         """
-        return "Mobile Game" + self.title + ", publisher " + self.publisher + ", realise year " \
-            + str(self.realise_year) + ", min players " + str(self.min_players) + ", max players " \
-            + str(self.max_players) + ", current player " + str(self.current_players)
+        return f"Mobile Game: {self.title}, {self.publisher}, {self.game_version}, {self.realise_year}, " \
+               f"{self.min_players}, {self.max_players}, {self.current_players}"
